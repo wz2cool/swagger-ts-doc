@@ -1,6 +1,6 @@
 import * as lodash from "lodash";
-import { ApiPropertyInfo } from "../model";
 import { CommonHelper } from "../helper";
+import { ApiPropertyInfo } from "../model";
 
 export class ApiModelCache {
     public static getInstance() {

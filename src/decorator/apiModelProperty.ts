@@ -3,7 +3,9 @@ import { CommonHelper } from "../helper";
 import { ApiPropertyInfo, DataTypes } from "../model";
 
 export function ApiModelProperty(dataType: DataTypes);
+// tslint:disable-next-line:unified-signatures
 export function ApiModelProperty(dataType: DataTypes, required: boolean);
+// tslint:disable-next-line:unified-signatures
 export function ApiModelProperty(dataType: DataTypes, notes: string);
 export function ApiModelProperty(dataType: DataTypes, a1?, a2?) {
     const cache = ApiModelCache.getInstance();

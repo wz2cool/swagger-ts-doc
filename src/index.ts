@@ -1,13 +1,17 @@
 import {
-    ApiModelProperty
+    ApiModelProperty,
 } from "./decorator";
 
 import {
     ApiPropertyInfo,
-    DataTypes
+    DataTypes,
 } from "./model";
+
+import {
+    ApiModelCache,
+} from "./cache";
 
 export {
     ApiModelProperty,
-    DataTypes
-}
+    DataTypes,
+};
