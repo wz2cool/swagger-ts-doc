@@ -2,12 +2,12 @@ import * as lodash from "lodash";
 import { PropertyInfo } from "../model";
 import { CommonHelper } from "../helper";
 
-export class ModelCache {
+export class ApiModelCache {
     public static getInstance() {
         return this.instance;
     }
 
-    private static instance = new ModelCache();
+    private static instance = new ApiModelCache();
     private readonly propertyCache: { [modelName: string]: { [property: string]: PropertyInfo } } = {};
     private constructor() {
         // hide constructor

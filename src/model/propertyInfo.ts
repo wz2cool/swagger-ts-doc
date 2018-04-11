@@ -3,4 +3,5 @@ export class PropertyInfo {
     public propertyName: string;
     public propertyType: string;
     public required: boolean;
+    public notes: string;
 }
