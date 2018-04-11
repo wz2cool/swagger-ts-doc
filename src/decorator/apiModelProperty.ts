@@ -2,9 +2,9 @@ import { ApiModelCache } from "../cache";
 import { CommonHelper } from "../helper";
 import { ApiPropertyInfo, DataTypes } from "../model";
 
+export function ApiModelProperty(dataType: DataTypes);
 export function ApiModelProperty(dataType: DataTypes, required: boolean);
 export function ApiModelProperty(dataType: DataTypes, notes: string);
-export function ApiModelProperty(dataType: DataTypes, required: boolean, notes: string)
 export function ApiModelProperty(dataType: DataTypes, a1?, a2?) {
     const cache = ApiModelCache.getInstance();
     return (target: any, propertyKey: string) => {
