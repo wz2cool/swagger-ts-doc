@@ -1,5 +1,5 @@
 import * as lodash from "lodash";
-import { PropertyInfo } from "../model";
+import { ApiPropertyInfo } from "../model";
 import { CommonHelper } from "../helper";
 
 export class ApiModelCache {
@@ -8,12 +8,12 @@ export class ApiModelCache {
     }
 
     private static instance = new ApiModelCache();
-    private readonly propertyCache: { [modelName: string]: { [property: string]: PropertyInfo } } = {};
+    private readonly propertyCache: { [modelName: string]: { [property: string]: ApiPropertyInfo } } = {};
     private constructor() {
         // hide constructor
     }
 
-    public cachePropertyInfo(propertyInfo: PropertyInfo): void {
+    public cachePropertyInfo(propertyInfo: ApiPropertyInfo): void {
         const modelName = propertyInfo.modelName;
         const propertyName = propertyInfo.propertyName;
         let propMap = this.propertyCache[modelName];
@@ -26,7 +26,7 @@ export class ApiModelCache {
         }
     }
 
-    public getModelInfos(modleName: string): PropertyInfo[] {
+    public getModelInfos(modleName: string): ApiPropertyInfo[] {
         const propMap = this.propertyCache[modleName];
         if (CommonHelper.isNullOrUndefined(propMap)) {
             return [];

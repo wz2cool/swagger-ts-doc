@@ -1,7 +1,7 @@
-export class PropertyInfo {
+export class ApiPropertyInfo {
     public modelName: string;
     public propertyName: string;
-    public propertyType: string;
+    public dataType: string;
     public required: boolean;
     public notes: string;
 }

@@ -1,12 +1,11 @@
 import { ApiModelCache } from "../cache";
 import { CommonHelper } from "../helper";
-import "reflect-metadata";
-import { PropertyInfo } from "../model";
+import { ApiPropertyInfo, DataTypes } from "../model";
 
-export function ApiModelProperty(required: boolean);
-export function ApiModelProperty(notes: string);
-export function ApiModelProperty(required: boolean, notes: string)
-export function ApiModelProperty(a1?, a2?) {
+export function ApiModelProperty(dataType: DataTypes, required: boolean);
+export function ApiModelProperty(dataType: DataTypes, notes: string);
+export function ApiModelProperty(dataType: DataTypes, required: boolean, notes: string)
+export function ApiModelProperty(dataType: DataTypes, a1?, a2?) {
     const cache = ApiModelCache.getInstance();
     return (target: any, propertyKey: string) => {
         if (CommonHelper.isNullOrUndefined(target)
@@ -27,10 +26,10 @@ export function ApiModelProperty(a1?, a2?) {
             propertyNotes = a2;
         }
 
-        const propertyInfo = new PropertyInfo();
+        const propertyInfo = new ApiPropertyInfo();
         propertyInfo.modelName = target.constructor.name;
         propertyInfo.propertyName = propertyKey;
-        propertyInfo.propertyType = Reflect.getMetadata("design:type", target, propertyKey);
+        propertyInfo.dataType = DataTypes[dataType];
         propertyInfo.required = propertyRequired;
         propertyInfo.notes = propertyNotes;
         cache.cachePropertyInfo(propertyInfo);

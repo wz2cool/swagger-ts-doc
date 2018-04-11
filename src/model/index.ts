@@ -1,3 +1,4 @@
-import { PropertyInfo } from "./propertyInfo";
+import { ApiPropertyInfo } from "./apiPropertyInfo";
+import { DataTypes } from "./dataTypes";
 
-export { PropertyInfo }
+export { ApiPropertyInfo, DataTypes }
