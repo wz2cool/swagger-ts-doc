@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/wz2cool/ts-swagger-node/issues"
   },
-  "homepage": "https://github.com/wz2cool/ts-swagger-node#readme"
+  "homepage": "https://github.com/wz2cool/ts-swagger-node#readme",
+  "dependencies": {
+    "lodash": "~4.17.5"
+  },
+  "devDependencies": {
+    "@types/lodash": "~4.14.106"
+  }
 }
