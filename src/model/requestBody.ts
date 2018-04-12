@@ -1,4 +1,5 @@
-import { DataType, RequestArgument } from ".";
+import { DataType } from "./dataType";
+import { RequestArgument } from "./requestArgument";
 
 export class RequestBody extends RequestArgument {
     public objectBody: new () => any;

@@ -1,5 +1,6 @@
-import { DataType, RequestArgument } from ".";
 import { CommonHelper } from "../helper";
+import { DataType } from "./dataType";
+import { RequestArgument } from "./requestArgument";
 
 export class RequestParam extends RequestArgument {
     public required: boolean;
