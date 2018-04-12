@@ -30,6 +30,9 @@ export class Server {
     private routes(): void {
         const studentApi = new StudentApi();
         RegisterRequestMapping(studentApi.addStudent);
+        RegisterRequestMapping(studentApi.deleteStudent);
+        RegisterRequestMapping(studentApi.modifyStudent);
+        RegisterRequestMapping(studentApi.getStudents);
         this.app.use("/ts_im_apis/students", studentApi.getRoute());
     }
 

@@ -30,37 +30,43 @@ export class SwaggerGenerator {
     }
 
     public static generatePaths(requestMappingInfos: RequestMappingInfo[]): any {
+        const pathGroup = lodash.groupBy(requestMappingInfos, "path");
         const result: any = {};
-        for (const requestMappingInfo of requestMappingInfos) {
-            const tags: string[] = [requestMappingInfo.tag];
-            const consumes: string[] = ["application/json"];
-            const produces: string[] = ["application/json"];
-            const parameters: any[] = [];
-            const responses: any[] = [];
+        for (const key in pathGroup) {
+            if (pathGroup.hasOwnProperty(key)) {
+                const pathDef: any = {};
+                const groupRequestMappingInfos = pathGroup[key];
+                for (const requestMappingInfo of groupRequestMappingInfos) {
+                    const tags: string[] = [requestMappingInfo.tag];
+                    const consumes: string[] = ["application/json"];
+                    const produces: string[] = ["application/json"];
+                    const parameters: any[] = [];
+                    const responses: any[] = [];
 
-            if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestArguments)) {
-                for (const requestArgument of requestMappingInfo.requestArguments) {
-                    const parameter = SwaggerGenerator.generatePathParameter(requestArgument);
-                    parameters.push(parameter);
+                    if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestArguments)) {
+                        for (const requestArgument of requestMappingInfo.requestArguments) {
+                            const parameter = SwaggerGenerator.generatePathParameter(requestArgument);
+                            parameters.push(parameter);
+                        }
+                    }
+
+                    const successResponse: any = {};
+                    successResponse["200"] = { description: "OK" };
+                    responses.push(successResponse);
+
+                    const methodDef: any = {};
+                    methodDef.tags = tags;
+                    methodDef.consumes = consumes;
+                    methodDef.produces = produces;
+                    methodDef.parameters = parameters;
+                    methodDef.responses = responses;
+                    const requestMethod = RequestMethod[requestMappingInfo.method].toLowerCase();
+                    pathDef[requestMethod] = methodDef;
                 }
+                result[key] = pathDef;
             }
-
-            const successResponse: any = {};
-            successResponse["200"] = { description: "OK" };
-            responses.push(successResponse);
-
-            const methodDef: any = {};
-            methodDef.tags = tags;
-            methodDef.consumes = consumes;
-            methodDef.produces = produces;
-            methodDef.parameters = parameters;
-            methodDef.responses = responses;
-
-            const pathDef: any = {};
-            const requestMethod = RequestMethod[requestMappingInfo.method].toLowerCase();
-            pathDef[requestMethod] = methodDef;
-            result[requestMappingInfo.path] = pathDef;
         }
+
         return result;
     }
 

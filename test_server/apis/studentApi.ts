@@ -1,5 +1,5 @@
 import * as express from "express";
-import { DataType, log, RequestBody, requestMapping, RequestMethod, RequestParam } from "../../src";
+import { DataType, log, RequestBody, requestMapping, RequestMethod, RequestParam, PathVariable } from "../../src";
 import { ApiModelCache } from "../../src/cache";
 import { Student } from "../model/student";
 
@@ -18,10 +18,30 @@ export class StudentApi {
         return route;
     }
 
-    @requestMapping("/student", RequestMethod.POST, [
+    @requestMapping("/students", RequestMethod.POST, [
         new RequestBody("student", DataType.object, Student),
     ])
     public addStudent(newOne: Student): void {
         this.students.push(newOne);
+    }
+
+    @requestMapping("/students/{id}", RequestMethod.DELETE, [
+        new PathVariable("id", DataType.integer),
+    ])
+    public deleteStudent(id: number): void {
+        //
+    }
+
+    @requestMapping("/students/{id}", RequestMethod.PUT, [
+        new PathVariable("id", DataType.integer),
+        new RequestBody("student", DataType.object, Student),
+    ])
+    public modifyStudent(s: Student): void {
+
+    }
+
+    @requestMapping("/students", RequestMethod.GET, [])
+    public getStudents(): void {
+
     }
 }
