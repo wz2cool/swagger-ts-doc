@@ -16,8 +16,8 @@ export class StudentApi {
         return route;
     }
 
-    @log
+    @requestMapping("fasdf")
     public addStudent(newOne: Student): void {
-        //
+        console.log("addStudent");
     }
 }
