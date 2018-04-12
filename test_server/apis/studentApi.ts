@@ -4,6 +4,8 @@ import { ApiModelCache } from "../../src/cache";
 import { Student } from "../model/student";
 
 export class StudentApi {
+    private students: Student[] = [];
+
     public getRoute(): express.Router {
         const route = express.Router();
 
@@ -18,10 +20,8 @@ export class StudentApi {
 
     @requestMapping("/student", RequestMethod.POST, [
         new RequestBody("student", DataType.object, Student),
-        new RequestParam("pageNum", DataType.integer),
-        new RequestParam("pageSize", DataType.integer),
     ])
     public addStudent(newOne: Student): void {
-        console.log("addStudent");
+        this.students.push(newOne);
     }
 }
