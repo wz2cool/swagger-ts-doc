@@ -24,7 +24,9 @@ export class Server {
         this.routes();
         this.initSwagger();
 
-        this.testGeneratePaths();
+        // this.testGeneratePaths();
+        const result = SwaggerGenerator.generateJsonDocument();
+        console.log(result);
     }
 
     private routes(): void {

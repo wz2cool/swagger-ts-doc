@@ -1,4 +1,5 @@
 import * as lodash from "lodash";
+import { ApiModelCache, RequestMappingCache } from "../cache";
 import { CommonHelper } from "../helper";
 import {
     ApiPropertyInfo,
@@ -13,7 +14,17 @@ import {
 
 export class SwaggerGenerator {
     public static generateJsonDocument(): string {
-        return "";
+        const apiModelCache = ApiModelCache.getInstance();
+        const requestMappingCache = RequestMappingCache.getInstance();
+        const definitions = SwaggerGenerator.generateDefinitions(apiModelCache.getPropertyCache());
+        const paths = SwaggerGenerator.generatePaths(requestMappingCache.getRequestMappingInfos());
+
+        const result: any = {};
+        result.schemes = ["http", "https"];
+        result.definitions = definitions;
+        result.paths = paths;
+
+        return JSON.stringify(result);
     }
 
     public static generateDefinitions(
@@ -41,7 +52,7 @@ export class SwaggerGenerator {
                     const consumes: string[] = ["application/json"];
                     const produces: string[] = ["application/json"];
                     const parameters: any[] = [];
-                    const responses: any[] = [];
+                    const responses: any = {};
 
                     if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestArguments)) {
                         for (const requestArgument of requestMappingInfo.requestArguments) {
@@ -50,10 +61,7 @@ export class SwaggerGenerator {
                         }
                     }
 
-                    const successResponse: any = {};
-                    successResponse["200"] = { description: "OK" };
-                    responses.push(successResponse);
-
+                    responses[200] = { description: "OK" };
                     const methodDef: any = {};
                     methodDef.tags = tags;
                     methodDef.consumes = consumes;
@@ -72,18 +80,16 @@ export class SwaggerGenerator {
 
     public static generateModelDefinition(apiPropertyInfos: ApiPropertyInfo[]): any {
         const required: string[] = [];
-        const properties: any[] = [];
+        const properties: any = {};
 
         for (const apiPropertyInfo of apiPropertyInfos) {
             const propertyName = apiPropertyInfo.propertyName;
             if (apiPropertyInfo.required) {
                 required.push(propertyName);
             }
-            const propDef: any = {};
             const propTypeDef: any = {};
             propTypeDef.type = apiPropertyInfo.dataType;
-            propDef[propertyName] = propTypeDef;
-            properties.push(propDef);
+            properties[propertyName] = propTypeDef;
         }
 
         const modelDef: any = {};
@@ -115,7 +121,7 @@ export class SwaggerGenerator {
             result.name = requestArgument.name;
             result.required = true;
             const typeDef: any = {};
-            typeDef.type = requestArgument.dataType;
+            typeDef.type = DataType[requestArgument.dataType];
             result.schema = typeDef;
         }
         return result;
