@@ -1,4 +1,5 @@
 import { ApiPropertyInfo } from "./apiPropertyInfo";
-import { DataTypes } from "./dataTypes";
+import { DataType } from "./dataType";
+import { RequestMethod } from "./requestMethod";
 
-export { ApiPropertyInfo, DataTypes }
+export { ApiPropertyInfo, DataType, RequestMethod };

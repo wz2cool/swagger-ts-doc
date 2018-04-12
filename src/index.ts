@@ -1,11 +1,13 @@
 import {
     apiModelProperty,
+    log,
     requestMapping,
 } from "./decorator";
 
 import {
     ApiPropertyInfo,
-    DataTypes,
+    DataType,
+    RequestMethod,
 } from "./model";
 
 import {
@@ -18,7 +20,9 @@ import {
 
 export {
     apiModelProperty,
-    DataTypes,
+    DataType,
     RegisterApiModel,
     requestMapping,
+    RequestMethod,
+    log,
 };

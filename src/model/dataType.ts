@@ -1,8 +1,8 @@
-export enum DataTypes {
+export enum DataType {
     string,
     number,
     integer,
     boolean,
     array,
-    object
+    object,
 }
