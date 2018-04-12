@@ -7,7 +7,11 @@ import {
 import {
     ApiPropertyInfo,
     DataType,
+    PathVariable,
+    RequestArgument,
+    RequestBody,
     RequestMethod,
+    RequestParam,
 } from "./model";
 
 import {
@@ -26,5 +30,9 @@ export {
     requestMapping,
     RequestMethod,
     RegisterRequestMapping,
+    RequestBody,
+    RequestArgument,
+    RequestParam,
+    PathVariable,
     log,
 };

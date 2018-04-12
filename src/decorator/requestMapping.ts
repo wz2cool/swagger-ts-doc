@@ -1,6 +1,6 @@
-import { RequestMethod } from "../model";
+import { RequestArgument, RequestMethod } from "../model";
 
-export function requestMapping(path: string, method: RequestMethod) {
+export function requestMapping(path: string, method: RequestMethod, requestArguments: RequestArgument[]) {
     return (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
         const originalMethod = descriptor.value;
         descriptor.value = (...args: any[]) => {
