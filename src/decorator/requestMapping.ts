@@ -9,10 +9,18 @@ export function requestMapping(path: string, method: RequestMethod, requestArgum
         const originalMethod = descriptor.value;
         descriptor.value = (...args: any[]) => {
             if (args.length === 1 && args[0] === "swagger") {
+                if (CommonHelper.isNullOrUndefined(target)
+                    || CommonHelper.isNullOrUndefined(target.constructor)
+                    || CommonHelper.isNullOrUndefined(target.constructor.name)) {
+                    throw new Error("cannot find model from target.constructor.name");
+                }
+
                 const requestMappingInfo = new RequestMappingInfo();
+                requestMappingInfo.tag = target.constructor.name;
                 requestMappingInfo.unqiueKey = generateUniqueKey(path, method, requestArguments);
                 requestMappingInfo.path = path;
                 requestMappingInfo.method = method;
+                requestMappingInfo.requestArguments = requestArguments;
                 cache.cacheRequestMappingInfo(requestMappingInfo);
                 // save method
                 return null;

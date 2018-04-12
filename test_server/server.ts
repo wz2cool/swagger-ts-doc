@@ -5,7 +5,7 @@ import { RegisterApiModel, RegisterRequestMapping, SwaggerGenerator } from "../s
 import { ApiPropertyInfo, DataType } from "../src/model";
 import { StudentApi } from "./apis";
 import { Student } from "./model/student";
-import { ApiModelCache } from "../src/cache";
+import { ApiModelCache, RequestMappingCache } from "../src/cache";
 
 export class Server {
     public static bootstrap(): Server {
@@ -24,7 +24,7 @@ export class Server {
         this.routes();
         this.initSwagger();
 
-        this.testGenerateDefinitions();
+        this.testGeneratePaths();
     }
 
     private routes(): void {
@@ -58,5 +58,11 @@ export class Server {
 
         const test = SwaggerGenerator.generateModelDefinition(apiPropertyInfos);
         console.log(JSON.stringify(test));
+    }
+
+    private testGeneratePaths(): void {
+        const cache = RequestMappingCache.getInstance();
+        const result = SwaggerGenerator.generatePaths(cache.getRequestMappingInfos());
+        console.log(JSON.stringify(result));
     }
 }

@@ -3,8 +3,8 @@ import { RequestMethod } from "./requestMethod";
 
 export class RequestMappingInfo {
     public unqiueKey: string;
+    public tag: string;
     public path: string;
     public method: RequestMethod;
     public requestArguments: RequestArgument[];
-
 }
