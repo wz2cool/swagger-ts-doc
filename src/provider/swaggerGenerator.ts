@@ -113,16 +113,12 @@ export class SwaggerGenerator {
             result.in = "query";
             result.name = requestArgument.name;
             result.required = requestArgument.required;
-            const typeDef: any = {};
-            typeDef.type = requestArgument.dataType;
-            result.schema = typeDef;
+            result.type = DataType[requestArgument.dataType];
         } else if (requestArgument instanceof PathVariable) {
             result.in = "path";
             result.name = requestArgument.name;
             result.required = true;
-            const typeDef: any = {};
-            typeDef.type = DataType[requestArgument.dataType];
-            result.schema = typeDef;
+            result.type = DataType[requestArgument.dataType];
         }
         return result;
     }
