@@ -26,11 +26,15 @@ export class ApiModelCache {
         }
     }
 
-    public getModelInfos(modleName: string): ApiPropertyInfo[] {
-        const propMap = this.propertyCache[modleName];
+    public getModelInfos(modelName: string): ApiPropertyInfo[] {
+        const propMap = this.propertyCache[modelName];
         if (CommonHelper.isNullOrUndefined(propMap)) {
             return [];
         }
         return lodash.values(propMap);
+    }
+
+    public getPropertyCache(): { [modelName: string]: { [property: string]: ApiPropertyInfo } } {
+        return this.propertyCache;
     }
 }
