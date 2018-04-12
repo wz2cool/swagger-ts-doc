@@ -3,7 +3,7 @@ export function log(target: object, propertyKey: string, descriptor: TypedProper
 
     // NOTE: Do not use arrow syntax here. Use a function expression in 
     // order to use the correct value of `this` in this method (see notes below)
-    descriptor.value = function (...args: any[]) {
+    descriptor.value = (...args: any[]) => {
         // pre
         console.log("The method args are: " + JSON.stringify(args));
         // run and store result

@@ -16,6 +16,7 @@ import {
 
 import {
     RegisterApiModel,
+    RegisterRequestMapping,
 } from "./provider";
 
 export {
@@ -24,5 +25,6 @@ export {
     RegisterApiModel,
     requestMapping,
     RequestMethod,
+    RegisterRequestMapping,
     log,
 };

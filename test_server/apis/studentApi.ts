@@ -1,5 +1,5 @@
 import * as express from "express";
-import { requestMapping } from "../../src";
+import { log, requestMapping } from "../../src";
 import { ApiModelCache } from "../../src/cache";
 import { Student } from "../model/student";
 
@@ -16,7 +16,7 @@ export class StudentApi {
         return route;
     }
 
-    @requestMapping("/student")
+    @log
     public addStudent(newOne: Student): void {
         //
     }

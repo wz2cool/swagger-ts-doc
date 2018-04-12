@@ -1,7 +1,7 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as path from "path";
-import { RegisterApiModel } from "../src";
+import { RegisterApiModel, RegisterRequestMapping } from "../src";
 import { StudentApi } from "./apis";
 import { Student } from "./model/student";
 
@@ -25,6 +25,7 @@ export class Server {
 
     private routes(): void {
         const studentApi = new StudentApi();
+        RegisterRequestMapping(studentApi.addStudent);
         this.app.use("/ts_im_apis/students", studentApi.getRoute());
     }
 
