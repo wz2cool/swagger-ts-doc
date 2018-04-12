@@ -20,10 +20,15 @@ export class SwaggerGenerator {
         const paths = SwaggerGenerator.generatePaths(requestMappingCache.getRequestMappingInfos());
 
         const result: any = {};
+        result.info = {
+            description: "generate by ts_node_swagger",
+            title: "swgger",
+            version: "1.0.0",
+        };
         result.schemes = ["http", "https"];
         result.definitions = definitions;
         result.paths = paths;
-
+        result.swagger = "2.0";
         return JSON.stringify(result);
     }
 
