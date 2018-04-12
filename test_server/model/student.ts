@@ -1,10 +1,10 @@
-import { ApiModelProperty, DataTypes } from "../../src";
+import { apiModelProperty, DataTypes } from "../../src";
 
 export class Student {
-    @ApiModelProperty(DataTypes.string, true)
+    @apiModelProperty(DataTypes.string, true)
     public name: string;
-    @ApiModelProperty(DataTypes.integer, true)
+    @apiModelProperty(DataTypes.integer, true)
     public age: number;
-    @ApiModelProperty(DataTypes.string, "test")
+    @apiModelProperty(DataTypes.string, "test")
     public note: string;
 }

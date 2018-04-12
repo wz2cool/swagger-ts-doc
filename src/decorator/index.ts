@@ -1,3 +1,4 @@
-import { ApiModelProperty } from "./apiModelProperty";
+import { apiModelProperty } from "./apiModelProperty";
+import { requestMapping } from "./requestMapping";
 
-export { ApiModelProperty };
+export { apiModelProperty, requestMapping };

@@ -1,5 +1,6 @@
 import {
-    ApiModelProperty,
+    apiModelProperty,
+    requestMapping,
 } from "./decorator";
 
 import {
@@ -11,7 +12,13 @@ import {
     ApiModelCache,
 } from "./cache";
 
+import {
+    RegisterApiModel,
+} from "./provider";
+
 export {
-    ApiModelProperty,
+    apiModelProperty,
     DataTypes,
+    RegisterApiModel,
+    requestMapping,
 };

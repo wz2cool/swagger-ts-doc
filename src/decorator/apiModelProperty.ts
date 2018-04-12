@@ -2,12 +2,12 @@ import { ApiModelCache } from "../cache";
 import { CommonHelper } from "../helper";
 import { ApiPropertyInfo, DataTypes } from "../model";
 
-export function ApiModelProperty(dataType: DataTypes);
+export function apiModelProperty(dataType: DataTypes);
 // tslint:disable-next-line:unified-signatures
-export function ApiModelProperty(dataType: DataTypes, required: boolean);
+export function apiModelProperty(dataType: DataTypes, required: boolean);
 // tslint:disable-next-line:unified-signatures
-export function ApiModelProperty(dataType: DataTypes, notes: string);
-export function ApiModelProperty(dataType: DataTypes, a1?, a2?) {
+export function apiModelProperty(dataType: DataTypes, notes: string);
+export function apiModelProperty(dataType: DataTypes, a1?, a2?) {
     const cache = ApiModelCache.getInstance();
     return (target: any, propertyKey: string) => {
         if (CommonHelper.isNullOrUndefined(target)
