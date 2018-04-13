@@ -116,7 +116,7 @@ export class SwaggerHelper {
             result.name = requestArgument.name;
             result.required = true;
             const refModel: any = {};
-            const modelName = SwaggerHelper.getModelName(requestArgument.objectBody);
+            const modelName = SwaggerHelper.getModelName(requestArgument.refModel);
             refModel.$ref = `#/definitions/${modelName}`;
             result.schema = refModel;
         } else if (requestArgument instanceof RequestParam) {

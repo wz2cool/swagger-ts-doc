@@ -1,10 +1,15 @@
 import * as lodash from "lodash";
 import { RequestMappingCache } from "../cache";
 import { CommonHelper } from "../helper";
-import { RequestArgument, RequestMappingInfo, RequestMethod } from "../model";
+import { RequestArgument, RequestMappingInfo, RequestMethod, ResponseBody } from "../model";
 
 export function registerRequestMapping(
-    tag: { new(): any } | string, path: string, method: RequestMethod, requestArguments: RequestArgument[]) {
+    tag: { new(): any } | string,
+    path: string,
+    method: RequestMethod,
+    requestArguments: RequestArgument[],
+    responseBody: ResponseBody) {
+
     const cache = RequestMappingCache.getInstance();
     const requestMappingInfo = new RequestMappingInfo();
     const tagStr: string = typeof tag === "function" ? CommonHelper.getModelName(tag) : tag;
@@ -14,6 +19,7 @@ export function registerRequestMapping(
     requestMappingInfo.path = path;
     requestMappingInfo.method = method;
     requestMappingInfo.requestArguments = requestArguments;
+    requestMappingInfo.responseBody = responseBody;
     cache.cacheRequestMappingInfo(requestMappingInfo);
 }
 

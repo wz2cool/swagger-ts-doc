@@ -1,11 +1,13 @@
 import { DataType } from "./dataType";
-import { RequestArgument } from "./requestArgument";
 
-export class RequestBody extends RequestArgument {
+export class ResponseBody {
+    public name: string;
+    public dataType: DataType;
     public refModel: { new(): any };
 
     constructor(name: string, dataType: DataType, refModel?: { new(): any }) {
-        super(name, dataType);
+        this.name = name;
+        this.dataType = dataType;
         this.refModel = refModel;
     }
 }

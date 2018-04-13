@@ -21,7 +21,7 @@ export class ClassroomApi {
     public getRoute(): express.Router {
         const route = express.Router();
 
-        registerRequestMapping(ClassroomApi, "/classroom", RequestMethod.POST, [
+        registerRequestMapping(ClassroomApi, "/classrooms", RequestMethod.POST, [
             new RequestBody("classroom", DataType.object, Classroom),
         ]);
         route.post("/", (req, res, next) => {
