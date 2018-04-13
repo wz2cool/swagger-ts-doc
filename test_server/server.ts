@@ -5,8 +5,9 @@ import * as swaggerUi from "swagger-ui-express";
 import { registerApiModel, registerRequestMapping, swaggerJSDoc } from "../src";
 import { ApiModelCache, RequestMappingCache } from "../src/cache";
 import { ApiPropertyInfo, DataType, SwaggerInfoProperty, SwaggerOptions } from "../src/model";
-import { StudentApi } from "./apis";
+import { StudentApi, ClassroomApi } from "./apis";
 import { Student } from "./model/student";
+import { Classroom } from "./model";
 
 export class Server {
     public static bootstrap(): Server {
@@ -28,11 +29,14 @@ export class Server {
 
     private routes(): void {
         const studentApi = new StudentApi();
+        const classroomApi = new ClassroomApi();
         this.app.use("/students", studentApi.getRoute());
+        this.app.use("/classrooms", classroomApi.getRoute());
     }
 
     private initSwagger(): void {
         registerApiModel(Student);
+        registerApiModel(Classroom);
         const options = new SwaggerOptions();
         options.info = new SwaggerInfoProperty();
         options.info.version = "1.0.0";
