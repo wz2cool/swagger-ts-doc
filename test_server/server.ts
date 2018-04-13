@@ -28,7 +28,7 @@ export class Server {
 
     private routes(): void {
         const studentApi = new StudentApi();
-        this.app.use("/ts_im_apis/students", studentApi.getRoute());
+        this.app.use("/students", studentApi.getRoute());
     }
 
     private initSwagger(): void {
