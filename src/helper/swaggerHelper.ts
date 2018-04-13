@@ -78,16 +78,26 @@ export class SwaggerHelper {
             properties[propertyName] = propTypeDef;
 
             if (!CommonHelper.isNullOrUndefined(apiPropertyInfo.refModel)) {
-                const refModelStr = CommonHelper.getModelName(apiPropertyInfo.refModel);
-                switch (apiPropertyInfo.dataType) {
-                    case DataType.array:
-                        propTypeDef.items = {
-                            $ref: `#/definitions/${refModelStr}`,
-                        };
-                        break;
-                    case DataType.object:
-                        propTypeDef.$ref = `#/definitions/${refModelStr}`;
-                        break;
+                if (typeof apiPropertyInfo.refModel === "function") {
+                    const refModelStr = CommonHelper.getModelName(apiPropertyInfo.refModel);
+                    switch (apiPropertyInfo.dataType) {
+                        case DataType.array:
+                            propTypeDef.items = {
+                                $ref: `#/definitions/${refModelStr}`,
+                            };
+                            break;
+                        case DataType.object:
+                            propTypeDef.$ref = `#/definitions/${refModelStr}`;
+                            break;
+                    }
+                } else {
+                    switch (apiPropertyInfo.dataType) {
+                        case DataType.array:
+                            propTypeDef.items = {
+                                type: DataType[apiPropertyInfo.refModel],
+                            };
+                            break;
+                    }
                 }
             }
         }
