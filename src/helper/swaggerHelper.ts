@@ -13,25 +13,6 @@ import {
 } from "../model";
 
 export class SwaggerHelper {
-    public static generateJsonDocument(): string {
-        const apiModelCache = ApiModelCache.getInstance();
-        const requestMappingCache = RequestMappingCache.getInstance();
-        const definitions = SwaggerHelper.generateDefinitions(apiModelCache.getPropertyCache());
-        const paths = SwaggerHelper.generatePaths(requestMappingCache.getRequestMappingInfos());
-
-        const result: any = {};
-        result.info = {
-            description: "generate by ts_node_swagger",
-            title: "swgger",
-            version: "1.0.0",
-        };
-        result.schemes = ["http", "https"];
-        result.definitions = definitions;
-        result.paths = paths;
-        result.swagger = "2.0";
-        return JSON.stringify(result);
-    }
-
     public static generateDefinitions(
         propertyCache: { [modelName: string]: { [property: string]: ApiPropertyInfo } }): any {
         const result = {};
