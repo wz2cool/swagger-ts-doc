@@ -5,7 +5,7 @@ export abstract class RequestArgument {
     public dataType: DataType;
     public description: string;
 
-    constructor(name: string, dataType: DataType, description: string) {
+    constructor(name: string, dataType: DataType, description?: string) {
         this.name = name;
         this.dataType = dataType;
         this.description = description;

@@ -23,7 +23,7 @@ export class ClassroomApi {
         const route = express.Router();
 
         registerRequestMapping(ClassroomApi, "/classrooms", RequestMethod.POST, [
-            new RequestBody("classroom", DataType.object, "classroom", Classroom),
+            new RequestBody("classroom", DataType.object, Classroom),
         ], new ResponseBody(DataType.object, Classroom), "添加教室");
         route.post("/", (req, res, next) => {
             res.json("add classroom");
