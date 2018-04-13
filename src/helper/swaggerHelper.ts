@@ -12,12 +12,12 @@ import {
     RequestParam,
 } from "../model";
 
-export class SwaggerGenerator {
+export class SwaggerHelper {
     public static generateJsonDocument(): string {
         const apiModelCache = ApiModelCache.getInstance();
         const requestMappingCache = RequestMappingCache.getInstance();
-        const definitions = SwaggerGenerator.generateDefinitions(apiModelCache.getPropertyCache());
-        const paths = SwaggerGenerator.generatePaths(requestMappingCache.getRequestMappingInfos());
+        const definitions = SwaggerHelper.generateDefinitions(apiModelCache.getPropertyCache());
+        const paths = SwaggerHelper.generatePaths(requestMappingCache.getRequestMappingInfos());
 
         const result: any = {};
         result.info = {
@@ -39,7 +39,7 @@ export class SwaggerGenerator {
             if (propertyCache.hasOwnProperty(modelName)) {
                 const propertyMap = propertyCache[modelName];
                 const apiPropertyInfos = lodash.values(propertyMap);
-                result[modelName] = SwaggerGenerator.generateModelDefinition(apiPropertyInfos);
+                result[modelName] = SwaggerHelper.generateModelDefinition(apiPropertyInfos);
             }
         }
         return result;
@@ -61,7 +61,7 @@ export class SwaggerGenerator {
 
                     if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestArguments)) {
                         for (const requestArgument of requestMappingInfo.requestArguments) {
-                            const parameter = SwaggerGenerator.generatePathParameter(requestArgument);
+                            const parameter = SwaggerHelper.generatePathParameter(requestArgument);
                             parameters.push(parameter);
                         }
                     }
@@ -111,7 +111,7 @@ export class SwaggerGenerator {
             result.name = requestArgument.name;
             result.required = true;
             const refModel: any = {};
-            const modelName = SwaggerGenerator.getModelName(requestArgument.objectBody);
+            const modelName = SwaggerHelper.getModelName(requestArgument.objectBody);
             refModel.$ref = `#/definitions/${modelName}`;
             result.schema = refModel;
         } else if (requestArgument instanceof RequestParam) {

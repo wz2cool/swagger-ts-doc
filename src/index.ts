@@ -25,7 +25,7 @@ import {
 import {
     registerApiModel,
     registerRequestMapping,
-    SwaggerGenerator,
+    SwaggerHelper,
 } from "./provider";
 
 export {
@@ -40,7 +40,7 @@ export {
     RequestParam,
     PathVariable,
     log,
-    SwaggerGenerator,
+    SwaggerHelper,
     SwaggerContactProperty,
     SwaggerInfoProperty,
     SwaggerLicenseProperty,

@@ -1,5 +1,5 @@
 import { registerApiModel } from "./registerApiModel";
 import { registerRequestMapping } from "./registerRequestMapping";
-import { SwaggerGenerator } from "./swaggerGenerator";
+import { SwaggerHelper } from "./swaggerGenerator";
 
-export { registerApiModel, registerRequestMapping, SwaggerGenerator };
+export { registerApiModel, registerRequestMapping, SwaggerHelper };
