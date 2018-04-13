@@ -1,11 +1,11 @@
 import * as express from "express";
+import * as lodash from "lodash";
 import { MappingProvider } from "tsbatis";
 import {
     DataType,
     PathVariable,
     registerRequestMapping,
     RequestBody,
-    requestMapping,
     RequestMethod,
     RequestParam,
 } from "../../src";
@@ -21,6 +21,9 @@ export class StudentApi {
     public getRoute(): express.Router {
         const route = express.Router();
 
+        registerRequestMapping(StudentApi, "/students", RequestMethod.POST, [
+            new RequestBody("student", DataType.object, Student),
+        ]);
         route.post("/", (req, res, next) => {
             const input = MappingProvider.toDtoObject<Student>(Student, req.body);
             console.log("result", JSON.stringify(input));
@@ -29,45 +32,53 @@ export class StudentApi {
             res.json("");
         });
 
-        route.post("/:id", (req, res, next) => {
-            const groupId = req.params.id;
-            console.log("groupId", groupId);
-            this.deleteStudent(groupId);
+        registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.DELETE, [
+            new PathVariable("id", DataType.integer),
+        ]);
+        route.delete("/:id", (req, res, next) => {
+            const id = req.params.id;
+            this.deleteStudent(id);
             res.json("");
         });
 
+        registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.PUT, [
+            new PathVariable("id", DataType.integer),
+            new RequestBody("student", DataType.object, Student),
+        ]);
+        route.put("/:id", (req, res, next) => {
+            const id = req.params.id;
+            const input = MappingProvider.toDtoObject<Student>(Student, req.body);
+            input.id = id;
+            this.modifyStudent(input);
+            res.json("");
+        });
 
-        registerRequestMapping(this.addStudent);
-        registerRequestMapping(this.deleteStudent);
-        registerRequestMapping(this.modifyStudent);
-        registerRequestMapping(this.getStudents);
+        registerRequestMapping(StudentApi, "/students", RequestMethod.GET, []);
+        route.get("/", (req, res, next) => {
+            res.json(this.getStudents());
+        });
+
         return route;
     }
 
-    @requestMapping("/students", RequestMethod.POST, [
-        new RequestBody("student", DataType.object, Student),
-    ])
     public addStudent(newOne: Student): void {
         this.students.push(newOne);
     }
 
-    @requestMapping("/students/{id}", RequestMethod.DELETE, [
-        new PathVariable("id", DataType.integer),
-    ])
     public deleteStudent(id: number): void {
-        //
+        this.students = lodash.remove(this.students, (x: Student) => {
+            return x.id === id;
+        });
     }
 
-    @requestMapping("/students/{id}", RequestMethod.PUT, [
-        new PathVariable("id", DataType.integer),
-        new RequestBody("student", DataType.object, Student),
-    ])
     public modifyStudent(s: Student): void {
-
+        this.students = lodash.remove(this.students, (x: Student) => {
+            return x.id === s.id;
+        });
+        this.students.push(s);
     }
 
-    @requestMapping("/students", RequestMethod.GET, [])
-    public getStudents(): void {
-
+    public getStudents(): Student[] {
+        return this.students;
     }
 }

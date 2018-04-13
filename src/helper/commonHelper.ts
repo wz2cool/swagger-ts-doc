@@ -18,6 +18,15 @@ export class CommonHelper {
         return result;
     }
 
+    public static getModelName(o: new () => any): string {
+        if (CommonHelper.isNullOrUndefined(o)) {
+            return "";
+        }
+
+        const testObj = typeof o === "function" ? new o() : o;
+        return (testObj.constructor as any).name;
+    }
+
     private constructor() {
         // hide constructor
     }

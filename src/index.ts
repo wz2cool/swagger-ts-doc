@@ -1,7 +1,6 @@
 import {
     apiModelProperty,
     log,
-    requestMapping,
 } from "./decorator";
 
 import {
@@ -32,7 +31,6 @@ export {
     apiModelProperty,
     DataType,
     registerApiModel,
-    requestMapping,
     RequestMethod,
     registerRequestMapping,
     RequestBody,
