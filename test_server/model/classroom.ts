@@ -6,6 +6,8 @@ export class Classroom {
     public id: number;
     @apiModelProperty(DataType.string, true)
     public name: string;
-    @apiModelProperty(DataType.array, true)
+    @apiModelProperty(DataType.array, true, Student)
     public students: Student[];
+    @apiModelProperty(DataType.array, true, DataType.string)
+    public tags: string[];
 }

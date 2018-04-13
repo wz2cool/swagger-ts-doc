@@ -4,7 +4,7 @@ import { ApiPropertyInfo, DataType } from "../model";
 
 export function apiModelProperty(dataType: DataType, required: boolean);
 // tslint:disable-next-line:unified-signatures
-export function apiModelProperty(dataType: DataType, required: boolean, refModel: { new(): any });
+export function apiModelProperty(dataType: DataType, required: boolean, refModel: { new(): any } | DataType);
 // tslint:disable-next-line:unified-signatures
 export function apiModelProperty(dataType: DataType, required: boolean, notes: string);
 export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?) {
@@ -18,7 +18,7 @@ export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?
 
         let internalRefModel: { new(): any } = null;
         let propertyNotes: string;
-        if (typeof a1 === "function") {
+        if (typeof a1 === "function" || Number.isInteger(a1)) {
             internalRefModel = a1;
         } else if (typeof a1 === "string") {
             propertyNotes = a1;
