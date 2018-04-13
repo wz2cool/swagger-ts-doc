@@ -54,7 +54,11 @@ export class StudentApi {
             res.json("");
         });
 
-        registerRequestMapping(StudentApi, "/students", RequestMethod.GET, [], new ResponseBody(DataType.string));
+        registerRequestMapping(
+            StudentApi,
+            "/students",
+            RequestMethod.GET, [],
+            new ResponseBody(DataType.array, Student, "return all students"));
         route.get("/", (req, res, next) => {
             res.json(this.getStudents());
         });

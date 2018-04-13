@@ -2,6 +2,8 @@ import { ApiModelCache } from "../cache";
 import { CommonHelper } from "../helper";
 import { ApiPropertyInfo, DataType } from "../model";
 
+export function apiModelProperty(dataType: DataType);
+// tslint:disable-next-line:unified-signatures
 export function apiModelProperty(dataType: DataType, required: boolean);
 // tslint:disable-next-line:unified-signatures
 export function apiModelProperty(dataType: DataType, required: boolean, refModel: { new(): any } | DataType);
@@ -10,7 +12,7 @@ export function apiModelProperty(dataType: DataType, required: boolean, descript
 export function apiModelProperty(
     // tslint:disable-next-line:unified-signatures
     dataType: DataType, required: boolean, refModel: { new(): any } | DataType, description: string);
-export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?) {
+export function apiModelProperty(dataType: DataType, required?: boolean, a1?, a2?) {
     const cache = ApiModelCache.getInstance();
     return (target: any, propertyKey: string) => {
         if (CommonHelper.isNullOrUndefined(target)
@@ -35,7 +37,7 @@ export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?
         propertyInfo.modelName = target.constructor.name;
         propertyInfo.propertyName = propertyKey;
         propertyInfo.dataType = dataType;
-        propertyInfo.required = required;
+        propertyInfo.required = CommonHelper.isNullOrUndefined(required) ? false : required;
         propertyInfo.notes = propertyNotes;
         propertyInfo.refModel = internalRefModel;
         cache.cachePropertyInfo(propertyInfo);
