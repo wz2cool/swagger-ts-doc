@@ -139,6 +139,7 @@ export class SwaggerHelper {
 
     public static generateResponse(responseBody: ResponseBody): any {
         const result: any = {};
+        result.description = responseBody.description;
         const typeStr = DataType[responseBody.dataType];
         if (!CommonHelper.isNullOrUndefined(responseBody.refModel)) {
             const propTypeDef: any = {};
