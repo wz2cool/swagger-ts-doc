@@ -8,7 +8,8 @@ export function registerRequestMapping(
     path: string,
     method: RequestMethod,
     requestArguments: RequestArgument[],
-    responseBody: ResponseBody) {
+    responseBody: ResponseBody,
+    summary?: string) {
 
     const cache = RequestMappingCache.getInstance();
     const requestMappingInfo = new RequestMappingInfo();
@@ -20,6 +21,7 @@ export function registerRequestMapping(
     requestMappingInfo.method = method;
     requestMappingInfo.requestArguments = requestArguments;
     requestMappingInfo.responseBody = responseBody;
+    requestMappingInfo.summary = summary;
     cache.cacheRequestMappingInfo(requestMappingInfo);
 }
 

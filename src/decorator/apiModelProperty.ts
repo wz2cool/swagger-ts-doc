@@ -7,7 +7,9 @@ export function apiModelProperty(dataType: DataType, required: boolean);
 export function apiModelProperty(dataType: DataType, required: boolean, refModel: { new(): any } | DataType);
 // tslint:disable-next-line:unified-signatures
 export function apiModelProperty(dataType: DataType, required: boolean, description: string);
-export function apiModelProperty(dataType: DataType, required: boolean, refModel: { new(): any } | DataType, description: string);
+export function apiModelProperty(
+    // tslint:disable-next-line:unified-signatures
+    dataType: DataType, required: boolean, refModel: { new(): any } | DataType, description: string);
 export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?) {
     const cache = ApiModelCache.getInstance();
     return (target: any, propertyKey: string) => {

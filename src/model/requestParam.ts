@@ -5,8 +5,8 @@ import { RequestArgument } from "./requestArgument";
 export class RequestParam extends RequestArgument {
     public required: boolean;
 
-    constructor(name: string, dataType: DataType, required?: boolean) {
-        super(name, dataType);
+    constructor(name: string, dataType: DataType, description: string, required?: boolean) {
+        super(name, dataType, description);
         this.required = CommonHelper.isNullOrUndefined(required) ? false : required;
     }
 }

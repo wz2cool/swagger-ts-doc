@@ -9,4 +9,5 @@ export class RequestMappingInfo {
     public method: RequestMethod;
     public requestArguments: RequestArgument[];
     public responseBody: ResponseBody;
+    public summary: string;
 }

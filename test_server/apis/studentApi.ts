@@ -23,7 +23,7 @@ export class StudentApi {
         const route = express.Router();
 
         registerRequestMapping(StudentApi, "/students", RequestMethod.POST, [
-            new RequestBody("student", DataType.object, Student),
+            new RequestBody("student", DataType.object, "student", Student),
         ], new ResponseBody(DataType.string));
         route.post("/", (req, res, next) => {
             const input = MappingProvider.toDtoObject<Student>(Student, req.body);
@@ -34,7 +34,7 @@ export class StudentApi {
         });
 
         registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.DELETE, [
-            new PathVariable("id", DataType.integer),
+            new PathVariable("id", DataType.integer, "学生ID"),
         ], new ResponseBody(DataType.string));
         route.delete("/:id", (req, res, next) => {
             const id = req.params.id;
@@ -43,8 +43,8 @@ export class StudentApi {
         });
 
         registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.PUT, [
-            new PathVariable("id", DataType.integer),
-            new RequestBody("student", DataType.object, Student),
+            new PathVariable("id", DataType.integer, "学生ID"),
+            new RequestBody("student", DataType.object, "学生", Student),
         ], new ResponseBody(DataType.string));
         route.put("/:id", (req, res, next) => {
             const id = req.params.id;

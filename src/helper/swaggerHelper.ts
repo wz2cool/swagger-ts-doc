@@ -55,6 +55,7 @@ export class SwaggerHelper {
                     methodDef.produces = produces;
                     methodDef.parameters = parameters;
                     methodDef.responses = responses;
+                    methodDef.summary = requestMappingInfo.summary;
                     const requestMethod = RequestMethod[requestMappingInfo.method].toLowerCase();
                     pathDef[requestMethod] = methodDef;
                 }
@@ -113,6 +114,7 @@ export class SwaggerHelper {
 
     public static generatePathParameter(requestArgument: RequestArgument): any {
         const result: any = {};
+        result.description = requestArgument.description;
         if (requestArgument instanceof RequestBody) {
             result.in = "body";
             result.name = requestArgument.name;
