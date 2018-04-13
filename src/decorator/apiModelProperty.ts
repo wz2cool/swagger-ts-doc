@@ -2,12 +2,12 @@ import { ApiModelCache } from "../cache";
 import { CommonHelper } from "../helper";
 import { ApiPropertyInfo, DataType } from "../model";
 
-export function apiModelProperty(dataType: DataType);
-// tslint:disable-next-line:unified-signatures
 export function apiModelProperty(dataType: DataType, required: boolean);
 // tslint:disable-next-line:unified-signatures
-export function apiModelProperty(dataType: DataType, notes: string);
-export function apiModelProperty(dataType: DataType, a1?, a2?) {
+export function apiModelProperty(dataType: DataType, required: boolean, refModel: { new(): any });
+// tslint:disable-next-line:unified-signatures
+export function apiModelProperty(dataType: DataType, required: boolean, notes: string);
+export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?) {
     const cache = ApiModelCache.getInstance();
     return (target: any, propertyKey: string) => {
         if (CommonHelper.isNullOrUndefined(target)
@@ -16,10 +16,10 @@ export function apiModelProperty(dataType: DataType, a1?, a2?) {
             throw new Error("cannot find model from target.constructor.name");
         }
 
-        let propertyRequired: boolean = false;
+        let internalRefModel: { new(): any } = null;
         let propertyNotes: string;
-        if (typeof a1 === "boolean") {
-            propertyRequired = a1;
+        if (typeof a1 === "function") {
+            internalRefModel = a1;
         } else if (typeof a1 === "string") {
             propertyNotes = a1;
         }
@@ -32,8 +32,9 @@ export function apiModelProperty(dataType: DataType, a1?, a2?) {
         propertyInfo.modelName = target.constructor.name;
         propertyInfo.propertyName = propertyKey;
         propertyInfo.dataType = DataType[dataType];
-        propertyInfo.required = propertyRequired;
+        propertyInfo.required = required;
         propertyInfo.notes = propertyNotes;
+        propertyInfo.refModel = internalRefModel;
         cache.cachePropertyInfo(propertyInfo);
     };
 }

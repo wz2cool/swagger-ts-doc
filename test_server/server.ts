@@ -49,6 +49,5 @@ export class Server {
         };
 
         this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(null, o));
-        console.log(jsDoc);
     }
 }

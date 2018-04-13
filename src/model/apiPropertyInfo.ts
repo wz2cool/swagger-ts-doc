@@ -4,4 +4,5 @@ export class ApiPropertyInfo {
     public dataType: string;
     public required: boolean;
     public notes: string;
+    public refModel: { new(): any };
 }

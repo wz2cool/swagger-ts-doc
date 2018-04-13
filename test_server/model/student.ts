@@ -11,7 +11,7 @@ export class Student {
     @apiModelProperty(DataType.integer, true)
     @dtoField()
     public age: number;
-    @apiModelProperty(DataType.string, "test")
+    @apiModelProperty(DataType.string, false, "test")
     @dtoField()
     public note: string;
 }
