@@ -76,6 +76,20 @@ export class SwaggerHelper {
             const propTypeDef: any = {};
             propTypeDef.type = DataType[apiPropertyInfo.dataType];
             properties[propertyName] = propTypeDef;
+
+            if (!CommonHelper.isNullOrUndefined(apiPropertyInfo.refModel)) {
+                const refModelStr = CommonHelper.getModelName(apiPropertyInfo.refModel);
+                switch (apiPropertyInfo.dataType) {
+                    case DataType.array:
+                        propTypeDef.items = {
+                            $ref: `#/definitions/${refModelStr}`,
+                        };
+                        break;
+                    case DataType.object:
+                        propTypeDef.$ref = `#/definitions/${refModelStr}`;
+                        break;
+                }
+            }
         }
 
         const modelDef: any = {};
