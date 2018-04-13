@@ -8,6 +8,7 @@ import {
     RequestBody,
     RequestMethod,
     RequestParam,
+    ResponseBody,
 } from "../../src";
 import { ApiModelCache } from "../../src/cache";
 import { Student } from "../model/student";
@@ -23,7 +24,7 @@ export class StudentApi {
 
         registerRequestMapping(StudentApi, "/students", RequestMethod.POST, [
             new RequestBody("student", DataType.object, Student),
-        ]);
+        ], new ResponseBody(DataType.string));
         route.post("/", (req, res, next) => {
             const input = MappingProvider.toDtoObject<Student>(Student, req.body);
             console.log("result", JSON.stringify(input));
@@ -34,7 +35,7 @@ export class StudentApi {
 
         registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.DELETE, [
             new PathVariable("id", DataType.integer),
-        ]);
+        ], new ResponseBody(DataType.string));
         route.delete("/:id", (req, res, next) => {
             const id = req.params.id;
             this.deleteStudent(id);
@@ -44,7 +45,7 @@ export class StudentApi {
         registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.PUT, [
             new PathVariable("id", DataType.integer),
             new RequestBody("student", DataType.object, Student),
-        ]);
+        ], new ResponseBody(DataType.string));
         route.put("/:id", (req, res, next) => {
             const id = req.params.id;
             const input = MappingProvider.toDtoObject<Student>(Student, req.body);
@@ -53,7 +54,7 @@ export class StudentApi {
             res.json("");
         });
 
-        registerRequestMapping(StudentApi, "/students", RequestMethod.GET, []);
+        registerRequestMapping(StudentApi, "/students", RequestMethod.GET, [], new ResponseBody(DataType.string));
         route.get("/", (req, res, next) => {
             res.json(this.getStudents());
         });

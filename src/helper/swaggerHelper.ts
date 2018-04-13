@@ -10,6 +10,7 @@ import {
     RequestMappingInfo,
     RequestMethod,
     RequestParam,
+    ResponseBody,
 } from "../model";
 
 export class SwaggerHelper {
@@ -47,7 +48,7 @@ export class SwaggerHelper {
                         }
                     }
 
-                    responses[200] = { description: "OK" };
+                    responses[200] = SwaggerHelper.generateResponse(requestMappingInfo.responseBody);
                     const methodDef: any = {};
                     methodDef.tags = tags;
                     methodDef.consumes = consumes;
@@ -116,7 +117,7 @@ export class SwaggerHelper {
             result.name = requestArgument.name;
             result.required = true;
             const refModel: any = {};
-            const modelName = SwaggerHelper.getModelName(requestArgument.refModel);
+            const modelName = CommonHelper.getModelName(requestArgument.refModel);
             refModel.$ref = `#/definitions/${modelName}`;
             result.schema = refModel;
         } else if (requestArgument instanceof RequestParam) {
@@ -133,12 +134,34 @@ export class SwaggerHelper {
         return result;
     }
 
-    public static getModelName(o: { new(): any }): string {
-        if (CommonHelper.isNullOrUndefined(o)) {
-            return "";
+    public static generateResponse(responseBody: ResponseBody): any {
+        const result: any = {};
+        const typeStr = DataType[responseBody.dataType];
+        if (!CommonHelper.isNullOrUndefined(responseBody.refModel)) {
+            const propTypeDef: any = {};
+            result.schema = propTypeDef;
+            if (typeof responseBody.refModel === "function") {
+                const refModelStr = CommonHelper.getModelName(responseBody.refModel);
+                switch (responseBody.dataType) {
+                    case DataType.array:
+                        propTypeDef.items = {
+                            $ref: `#/definitions/${refModelStr}`,
+                        };
+                        break;
+                    case DataType.object:
+                        propTypeDef.$ref = `#/definitions/${refModelStr}`;
+                        break;
+                }
+            } else {
+                switch (responseBody.dataType) {
+                    case DataType.array:
+                        propTypeDef.items = {
+                            type: DataType[responseBody.refModel],
+                        };
+                        break;
+                }
+            }
         }
-
-        const testObj = typeof o === "function" ? new o() : o;
-        return (testObj.constructor as any).name;
+        return result;
     }
 }
