@@ -1,11 +1,12 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as path from "path";
+import * as swaggerUi from "swagger-ui-express";
 import { registerApiModel, registerRequestMapping, swaggerJSDoc } from "../src";
-import { ApiPropertyInfo, DataType, SwaggerOptions, SwaggerInfoProperty } from "../src/model";
+import { ApiModelCache, RequestMappingCache } from "../src/cache";
+import { ApiPropertyInfo, DataType, SwaggerInfoProperty, SwaggerOptions } from "../src/model";
 import { StudentApi } from "./apis";
 import { Student } from "./model/student";
-import { ApiModelCache, RequestMappingCache } from "../src/cache";
 
 export class Server {
     public static bootstrap(): Server {
@@ -23,29 +24,31 @@ export class Server {
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.routes();
         this.initSwagger();
-        this.testSwagger();
     }
 
     private routes(): void {
         const studentApi = new StudentApi();
-        registerRequestMapping(studentApi.addStudent);
-        registerRequestMapping(studentApi.deleteStudent);
-        registerRequestMapping(studentApi.modifyStudent);
-        registerRequestMapping(studentApi.getStudents);
         this.app.use("/ts_im_apis/students", studentApi.getRoute());
     }
 
     private initSwagger(): void {
         registerApiModel(Student);
-    }
-
-    private testSwagger(): void {
         const options = new SwaggerOptions();
         options.info = new SwaggerInfoProperty();
         options.info.version = "1.0.0";
         options.info.title = "testSwagger";
 
         const jsDoc = swaggerJSDoc(options);
+        this.app.get("/api-docs.json", (req, res) => {
+            res.setHeader("Content-Type", "application/json");
+            res.send(jsDoc);
+        });
+
+        const o = {
+            swaggerUrl: "/api-docs.json",
+        };
+
+        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(null, o));
         console.log(jsDoc);
     }
 }

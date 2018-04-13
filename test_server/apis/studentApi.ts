@@ -1,5 +1,13 @@
 import * as express from "express";
-import { DataType, log, RequestBody, requestMapping, RequestMethod, RequestParam, PathVariable } from "../../src";
+import {
+    DataType,
+    PathVariable,
+    registerRequestMapping,
+    RequestBody,
+    requestMapping,
+    RequestMethod,
+    RequestParam,
+} from "../../src";
 import { ApiModelCache } from "../../src/cache";
 import { Student } from "../model/student";
 
@@ -15,6 +23,10 @@ export class StudentApi {
             res.json(props);
         });
 
+        registerRequestMapping(this.addStudent);
+        registerRequestMapping(this.deleteStudent);
+        registerRequestMapping(this.modifyStudent);
+        registerRequestMapping(this.getStudents);
         return route;
     }
 
