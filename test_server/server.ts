@@ -48,10 +48,10 @@ export class Server {
             res.send(jsDoc);
         });
 
-        const o = {
+        const swaggerUiOptions = {
             swaggerUrl: "/api-docs.json",
         };
 
-        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(null, o));
+        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(null, swaggerUiOptions));
     }
 }
