@@ -6,6 +6,10 @@ import { RequestBody } from "./requestBody";
 import { RequestMappingInfo } from "./requestMappingInfo";
 import { RequestMethod } from "./requestMethod";
 import { RequestParam } from "./requestParam";
+import { SwaggerContactProperty } from "./swaggerContactProperty";
+import { SwaggerInfoProperty } from "./swaggerInfoProperty";
+import { SwaggerLicenseProperty } from "./swaggerLicenseProperty";
+import { SwaggerOptions } from "./swaggerOptions";
 
 export {
     ApiPropertyInfo,
@@ -16,4 +20,8 @@ export {
     RequestParam,
     PathVariable,
     RequestMappingInfo,
+    SwaggerContactProperty,
+    SwaggerInfoProperty,
+    SwaggerLicenseProperty,
+    SwaggerOptions,
 };

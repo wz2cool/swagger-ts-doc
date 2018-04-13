@@ -1,3 +1,3 @@
-export function RegisterApiModel(apiModel: new () => any) {
+export function registerApiModel(apiModel: new () => any) {
     const register = new apiModel();
 }

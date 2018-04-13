@@ -12,6 +12,10 @@ import {
     RequestBody,
     RequestMethod,
     RequestParam,
+    SwaggerContactProperty,
+    SwaggerInfoProperty,
+    SwaggerLicenseProperty,
+    SwaggerOptions,
 } from "./model";
 
 import {
@@ -19,22 +23,26 @@ import {
 } from "./cache";
 
 import {
-    RegisterApiModel,
-    RegisterRequestMapping,
+    registerApiModel,
+    registerRequestMapping,
     SwaggerGenerator,
 } from "./provider";
 
 export {
     apiModelProperty,
     DataType,
-    RegisterApiModel,
+    registerApiModel,
     requestMapping,
     RequestMethod,
-    RegisterRequestMapping,
+    registerRequestMapping,
     RequestBody,
     RequestArgument,
     RequestParam,
     PathVariable,
     log,
     SwaggerGenerator,
+    SwaggerContactProperty,
+    SwaggerInfoProperty,
+    SwaggerLicenseProperty,
+    SwaggerOptions,
 };

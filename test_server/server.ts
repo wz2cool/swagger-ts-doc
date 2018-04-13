@@ -1,7 +1,7 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as path from "path";
-import { RegisterApiModel, RegisterRequestMapping, SwaggerGenerator } from "../src";
+import { registerApiModel, registerRequestMapping, SwaggerGenerator } from "../src";
 import { ApiPropertyInfo, DataType } from "../src/model";
 import { StudentApi } from "./apis";
 import { Student } from "./model/student";
@@ -31,15 +31,15 @@ export class Server {
 
     private routes(): void {
         const studentApi = new StudentApi();
-        RegisterRequestMapping(studentApi.addStudent);
-        RegisterRequestMapping(studentApi.deleteStudent);
-        RegisterRequestMapping(studentApi.modifyStudent);
-        RegisterRequestMapping(studentApi.getStudents);
+        registerRequestMapping(studentApi.addStudent);
+        registerRequestMapping(studentApi.deleteStudent);
+        registerRequestMapping(studentApi.modifyStudent);
+        registerRequestMapping(studentApi.getStudents);
         this.app.use("/ts_im_apis/students", studentApi.getRoute());
     }
 
     private initSwagger(): void {
-        RegisterApiModel(Student);
+        registerApiModel(Student);
     }
 
     private testGenerateDefinitions(): void {
