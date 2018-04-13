@@ -74,7 +74,7 @@ export class SwaggerHelper {
                 required.push(propertyName);
             }
             const propTypeDef: any = {};
-            propTypeDef.type = apiPropertyInfo.dataType;
+            propTypeDef.type = DataType[apiPropertyInfo.dataType];
             properties[propertyName] = propTypeDef;
         }
 

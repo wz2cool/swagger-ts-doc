@@ -31,7 +31,7 @@ export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?
         const propertyInfo = new ApiPropertyInfo();
         propertyInfo.modelName = target.constructor.name;
         propertyInfo.propertyName = propertyKey;
-        propertyInfo.dataType = DataType[dataType];
+        propertyInfo.dataType = dataType;
         propertyInfo.required = required;
         propertyInfo.notes = propertyNotes;
         propertyInfo.refModel = internalRefModel;
