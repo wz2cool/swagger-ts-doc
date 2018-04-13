@@ -6,7 +6,7 @@ export function apiModelProperty(dataType: DataType, required: boolean);
 // tslint:disable-next-line:unified-signatures
 export function apiModelProperty(dataType: DataType, required: boolean, refModel: { new(): any } | DataType);
 // tslint:disable-next-line:unified-signatures
-export function apiModelProperty(dataType: DataType, required: boolean, notes: string);
+export function apiModelProperty(dataType: DataType, required: boolean, description: string);
 export function apiModelProperty(dataType: DataType, required: boolean, a1?, a2?) {
     const cache = ApiModelCache.getInstance();
     return (target: any, propertyKey: string) => {
