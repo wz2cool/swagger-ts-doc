@@ -25,7 +25,7 @@ this.app.get("/api-docs.json", (req, res) => {
 我们可以使用[swagger-ui-express](https://github.com/scottie1984/swagger-ui-express) 框架来寄宿swagger-ui.
 
 ### 怎样描述文档
-使用apiModelProperty 作为对属性的描述。
+使用apiModelProperty 作为对属性的描述, 主要作用是生成与之对应的 definitions 下的model。
 ```javascript
 import { apiModelProperty, DataType } from "swagger-ts-doc";
 
