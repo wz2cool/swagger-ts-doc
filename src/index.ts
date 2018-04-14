@@ -6,6 +6,7 @@ import {
 import {
     ApiPropertyInfo,
     DataType,
+    HttpStatusCode,
     PathVariable,
     RequestBody,
     RequestMethod,
@@ -38,11 +39,11 @@ export {
     RequestParameter,
     RequestParam,
     PathVariable,
-    log,
     swaggerJSDoc,
     SwaggerContactProperty,
     SwaggerInfoProperty,
     SwaggerLicenseProperty,
     SwaggerOptions,
     Response,
+    HttpStatusCode,
 };

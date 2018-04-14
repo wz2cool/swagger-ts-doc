@@ -7,7 +7,7 @@ export class RequestMappingInfo {
     public tag: string;
     public path: string;
     public method: RequestMethod;
-    public requestParameter: RequestParameter[];
-    public response: Response;
+    public requestParameters: RequestParameter[];
+    public responses: Response[];
     public summary: string;
 }

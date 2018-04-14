@@ -1,5 +1,6 @@
 import { ApiPropertyInfo } from "./apiPropertyInfo";
 import { DataType } from "./dataType";
+import { HttpStatusCode } from "./httpStatusCode";
 import { PathVariable } from "./pathVariable";
 import { RequestBody } from "./requestBody";
 import { RequestMappingInfo } from "./requestMappingInfo";
@@ -26,4 +27,5 @@ export {
     SwaggerLicenseProperty,
     SwaggerOptions,
     Response,
+    HttpStatusCode,
 };

@@ -41,14 +41,17 @@ export class SwaggerHelper {
                     const parameters: any[] = [];
                     const responses: any = {};
 
-                    if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestParameter)) {
-                        for (const requestArgument of requestMappingInfo.requestParameter) {
+                    if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestParameters)) {
+                        for (const requestArgument of requestMappingInfo.requestParameters) {
                             const parameter = SwaggerHelper.generatePathParameter(requestArgument);
                             parameters.push(parameter);
                         }
                     }
 
-                    responses[200] = SwaggerHelper.generateResponse(requestMappingInfo.response);
+                    for (const response of requestMappingInfo.responses) {
+                        responses[response.code] = SwaggerHelper.generateResponse(response);
+                    }
+
                     const methodDef: any = {};
                     methodDef.tags = tags;
                     methodDef.consumes = consumes;

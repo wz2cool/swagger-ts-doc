@@ -7,8 +7,8 @@ export function registerRequestMapping(
     tag: { new(): any } | string,
     path: string,
     method: RequestMethod,
-    requestArguments: RequestParameter[],
-    responseBody: Response,
+    requestParameters: RequestParameter[],
+    responses: Response[],
     summary?: string) {
 
     const cache = RequestMappingCache.getInstance();
@@ -16,11 +16,11 @@ export function registerRequestMapping(
     const tagStr: string = typeof tag === "function" ? CommonHelper.getModelName(tag) : tag;
 
     requestMappingInfo.tag = tagStr;
-    requestMappingInfo.unqiueKey = generateUniqueKey(path, method, requestArguments);
+    requestMappingInfo.unqiueKey = generateUniqueKey(path, method, requestParameters);
     requestMappingInfo.path = path;
     requestMappingInfo.method = method;
-    requestMappingInfo.requestParameter = requestArguments;
-    requestMappingInfo.response = responseBody;
+    requestMappingInfo.requestParameters = requestParameters;
+    requestMappingInfo.responses = responses;
     requestMappingInfo.summary = summary;
     cache.cacheRequestMappingInfo(requestMappingInfo);
 }
