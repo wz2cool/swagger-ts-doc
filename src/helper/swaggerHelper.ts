@@ -10,7 +10,7 @@ import {
     RequestMethod,
     RequestParam,
     RequestParameter,
-    ResponseBody,
+    Response,
 } from "../model";
 
 export class SwaggerHelper {
@@ -41,14 +41,14 @@ export class SwaggerHelper {
                     const parameters: any[] = [];
                     const responses: any = {};
 
-                    if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestArguments)) {
-                        for (const requestArgument of requestMappingInfo.requestArguments) {
+                    if (!CommonHelper.isNullOrUndefined(requestMappingInfo.requestParameter)) {
+                        for (const requestArgument of requestMappingInfo.requestParameter) {
                             const parameter = SwaggerHelper.generatePathParameter(requestArgument);
                             parameters.push(parameter);
                         }
                     }
 
-                    responses[200] = SwaggerHelper.generateResponse(requestMappingInfo.responseBody);
+                    responses[200] = SwaggerHelper.generateResponse(requestMappingInfo.response);
                     const methodDef: any = {};
                     methodDef.tags = tags;
                     methodDef.consumes = consumes;
@@ -114,7 +114,7 @@ export class SwaggerHelper {
         return result;
     }
 
-    public static generateResponse(responseBody: ResponseBody): any {
+    public static generateResponse(responseBody: Response): any {
         const result: any = {};
         result.description = responseBody.description;
         const typeStr = DataType[responseBody.dataType];

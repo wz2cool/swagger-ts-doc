@@ -1,14 +1,14 @@
 import * as lodash from "lodash";
 import { RequestMappingCache } from "../cache";
 import { CommonHelper } from "../helper";
-import { RequestMappingInfo, RequestMethod, RequestParameter, ResponseBody } from "../model";
+import { RequestMappingInfo, RequestMethod, RequestParameter, Response } from "../model";
 
 export function registerRequestMapping(
     tag: { new(): any } | string,
     path: string,
     method: RequestMethod,
     requestArguments: RequestParameter[],
-    responseBody: ResponseBody,
+    responseBody: Response,
     summary?: string) {
 
     const cache = RequestMappingCache.getInstance();
@@ -19,8 +19,8 @@ export function registerRequestMapping(
     requestMappingInfo.unqiueKey = generateUniqueKey(path, method, requestArguments);
     requestMappingInfo.path = path;
     requestMappingInfo.method = method;
-    requestMappingInfo.requestArguments = requestArguments;
-    requestMappingInfo.responseBody = responseBody;
+    requestMappingInfo.requestParameter = requestArguments;
+    requestMappingInfo.response = responseBody;
     requestMappingInfo.summary = summary;
     cache.cacheRequestMappingInfo(requestMappingInfo);
 }

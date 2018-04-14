@@ -1,6 +1,6 @@
 import { DataType } from "./dataType";
 
-export class ResponseBody {
+export class Response {
     public dataType: DataType;
     public refModel: { new(): any } | DataType;
     public description: string;

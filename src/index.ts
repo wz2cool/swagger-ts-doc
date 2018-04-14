@@ -11,7 +11,7 @@ import {
     RequestMethod,
     RequestParam,
     RequestParameter,
-    ResponseBody,
+    Response,
     SwaggerContactProperty,
     SwaggerInfoProperty,
     SwaggerLicenseProperty,
@@ -44,5 +44,5 @@ export {
     SwaggerInfoProperty,
     SwaggerLicenseProperty,
     SwaggerOptions,
-    ResponseBody,
+    Response,
 };
