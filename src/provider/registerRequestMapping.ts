@@ -1,13 +1,13 @@
 import * as lodash from "lodash";
 import { RequestMappingCache } from "../cache";
 import { CommonHelper } from "../helper";
-import { RequestArgument, RequestMappingInfo, RequestMethod, ResponseBody } from "../model";
+import { RequestMappingInfo, RequestMethod, RequestParameter, ResponseBody } from "../model";
 
 export function registerRequestMapping(
     tag: { new(): any } | string,
     path: string,
     method: RequestMethod,
-    requestArguments: RequestArgument[],
+    requestArguments: RequestParameter[],
     responseBody: ResponseBody,
     summary?: string) {
 
@@ -25,7 +25,7 @@ export function registerRequestMapping(
     cache.cacheRequestMappingInfo(requestMappingInfo);
 }
 
-function generateUniqueKey(path: string, method: RequestMethod, requestArguments: RequestArgument[]): string {
+function generateUniqueKey(path: string, method: RequestMethod, requestArguments: RequestParameter[]): string {
     const methodStr = RequestMethod[method];
     let requestArgumentStr: string;
     if (CommonHelper.isNullOrUndefined(requestArguments)) {

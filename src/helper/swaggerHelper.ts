@@ -5,11 +5,11 @@ import {
     ApiPropertyInfo,
     DataType,
     PathVariable,
-    RequestArgument,
     RequestBody,
     RequestMappingInfo,
     RequestMethod,
     RequestParam,
+    RequestParameter,
     ResponseBody,
 } from "../model";
 
@@ -89,7 +89,7 @@ export class SwaggerHelper {
         return modelDef;
     }
 
-    public static generatePathParameter(requestArgument: RequestArgument): any {
+    public static generatePathParameter(requestArgument: RequestParameter): any {
         const result: any = {};
         result.description = requestArgument.description;
         if (requestArgument instanceof RequestBody) {

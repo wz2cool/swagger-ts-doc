@@ -1,5 +1,5 @@
 import { DataType } from "./dataType";
-import { RequestArgument } from "./requestArgument";
+import { RequestParameter } from "./requestParameter";
 
-export class PathVariable extends RequestArgument {
+export class PathVariable extends RequestParameter {
 }

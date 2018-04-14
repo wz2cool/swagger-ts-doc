@@ -1,7 +1,7 @@
 import { DataType } from "./dataType";
-import { RequestArgument } from "./requestArgument";
+import { RequestParameter } from "./requestParameter";
 
-export class RequestBody extends RequestArgument {
+export class RequestBody extends RequestParameter {
     public refModel: { new(): any };
 
     constructor(name: string, dataType: DataType);

@@ -1,8 +1,8 @@
 import { CommonHelper } from "../helper";
 import { DataType } from "./dataType";
-import { RequestArgument } from "./requestArgument";
+import { RequestParameter } from "./requestParameter";
 
-export class RequestParam extends RequestArgument {
+export class RequestParam extends RequestParameter {
     public required: boolean;
 
     constructor(name: string, dataType: DataType);

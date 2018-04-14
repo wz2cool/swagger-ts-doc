@@ -1,5 +1,5 @@
-import { RequestArgument } from "./requestArgument";
 import { RequestMethod } from "./requestMethod";
+import { RequestParameter } from "./requestParameter";
 import { ResponseBody } from "./responseBody";
 
 export class RequestMappingInfo {
@@ -7,7 +7,7 @@ export class RequestMappingInfo {
     public tag: string;
     public path: string;
     public method: RequestMethod;
-    public requestArguments: RequestArgument[];
+    public requestArguments: RequestParameter[];
     public responseBody: ResponseBody;
     public summary: string;
 }

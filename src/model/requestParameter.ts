@@ -1,6 +1,6 @@
 import { DataType } from "./dataType";
 
-export abstract class RequestArgument {
+export abstract class RequestParameter {
     public name: string;
     public dataType: DataType;
     public description: string;
