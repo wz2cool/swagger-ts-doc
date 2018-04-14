@@ -80,7 +80,7 @@ export class SwaggerHelper {
             }
             const propTypeDef: any = SwaggerHelper.generatePropertyDef(
                 apiPropertyInfo.dataType, apiPropertyInfo.refModel) || {};
-            propTypeDef.type = DataType[apiPropertyInfo.dataType];
+            propTypeDef.type = DataType[apiPropertyInfo.dataType].toLowerCase();
             propTypeDef.description = apiPropertyInfo.description;
             properties[propertyName] = propTypeDef;
         }
@@ -107,12 +107,12 @@ export class SwaggerHelper {
             result.in = "query";
             result.name = requestArgument.name;
             result.required = requestArgument.required;
-            result.type = DataType[requestArgument.dataType];
+            result.type = DataType[requestArgument.dataType].toLowerCase();
         } else if (requestArgument instanceof PathVariable) {
             result.in = "path";
             result.name = requestArgument.name;
             result.required = true;
-            result.type = DataType[requestArgument.dataType];
+            result.type = DataType[requestArgument.dataType].toLowerCase();
         }
         return result;
     }
@@ -120,7 +120,7 @@ export class SwaggerHelper {
     public static generateResponse(responseBody: Response): any {
         const result: any = {};
         result.description = responseBody.description;
-        const typeStr = DataType[responseBody.dataType];
+        const typeStr = DataType[responseBody.dataType].toLowerCase();
         result.type = typeStr;
         result.schema = SwaggerHelper.generatePropertyDef(responseBody.dataType, responseBody.refModel);
         return result;
@@ -135,20 +135,20 @@ export class SwaggerHelper {
         if (typeof refModel === "function") {
             const refModelStr = CommonHelper.getModelName(refModel);
             switch (dataType) {
-                case DataType.array:
+                case DataType.ARRAY:
                     propTypeDef.items = {
                         $ref: `#/definitions/${refModelStr}`,
                     };
                     break;
-                case DataType.object:
+                case DataType.OBJECT:
                     propTypeDef.$ref = `#/definitions/${refModelStr}`;
                     break;
             }
         } else {
             switch (dataType) {
-                case DataType.array:
+                case DataType.ARRAY:
                     propTypeDef.items = {
-                        type: DataType[refModel],
+                        type: DataType[refModel].toLowerCase(),
                     };
                     break;
             }

@@ -25,11 +25,11 @@ export class ClassroomApi {
 
         registerRequestMapping(ClassroomApi, "/classrooms", RequestMethod.POST,
             [
-                new RequestBody("classroom", DataType.object, Classroom),
+                new RequestBody("classroom", DataType.OBJECT, Classroom),
             ],
             [
-                new Response(HttpStatusCode.OK, DataType.object, Classroom, "教室添加成功"),
-                new Response(HttpStatusCode.INTERNAL_SERVER_ERROR, DataType.object, "内部错误"),
+                new Response(HttpStatusCode.OK, DataType.OBJECT, Classroom, "教室添加成功"),
+                new Response(HttpStatusCode.INTERNAL_SERVER_ERROR, DataType.OBJECT, "内部错误"),
             ],
             "添加教室");
         route.post("/", (req, res, next) => {

@@ -25,10 +25,10 @@ export class StudentApi {
 
         registerRequestMapping(StudentApi, "/students", RequestMethod.POST,
             [
-                new RequestBody("student", DataType.object, Student, "学生"),
+                new RequestBody("student", DataType.OBJECT, Student, "学生"),
             ],
             [
-                new Response(HttpStatusCode.OK, DataType.string),
+                new Response(HttpStatusCode.OK, DataType.STRING),
             ]);
         route.post("/", (req, res, next) => {
             const input = MappingProvider.toDtoObject<Student>(Student, req.body);
@@ -39,10 +39,10 @@ export class StudentApi {
         });
 
         registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.DELETE, [
-            new PathVariable("id", DataType.integer, "学生ID"),
+            new PathVariable("id", DataType.INTEGER, "学生ID"),
         ],
             [
-                new Response(HttpStatusCode.OK, DataType.string),
+                new Response(HttpStatusCode.OK, DataType.STRING),
             ]);
         route.delete("/:id", (req, res, next) => {
             const id = req.params.id;
@@ -51,11 +51,11 @@ export class StudentApi {
         });
 
         registerRequestMapping(StudentApi, "/students/{id}", RequestMethod.PUT, [
-            new PathVariable("id", DataType.integer, "学生ID"),
-            new RequestBody("student", DataType.object, Student, "学生"),
+            new PathVariable("id", DataType.INTEGER, "学生ID"),
+            new RequestBody("student", DataType.OBJECT, Student, "学生"),
         ],
             [
-                new Response(HttpStatusCode.OK, DataType.string),
+                new Response(HttpStatusCode.OK, DataType.STRING),
             ]);
         route.put("/:id", (req, res, next) => {
             const id = req.params.id;
@@ -70,7 +70,7 @@ export class StudentApi {
             "/students",
             RequestMethod.GET, [],
             [
-                new Response(HttpStatusCode.OK, DataType.array, Student, "return all students")]);
+                new Response(HttpStatusCode.OK, DataType.ARRAY, Student, "return all students")]);
         route.get("/", (req, res, next) => {
             res.json(this.getStudents());
         });

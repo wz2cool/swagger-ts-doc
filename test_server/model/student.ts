@@ -2,16 +2,16 @@ import { dtoField } from "tsbatis";
 import { apiModelProperty, DataType } from "../../src";
 
 export class Student {
-    @apiModelProperty(DataType.integer, false)
+    @apiModelProperty(DataType.INTEGER, false)
     @dtoField()
     public id: number;
-    @apiModelProperty(DataType.string, true)
+    @apiModelProperty(DataType.STRING, true)
     @dtoField()
     public name: string;
-    @apiModelProperty(DataType.integer, true)
+    @apiModelProperty(DataType.INTEGER, true)
     @dtoField()
     public age: number;
-    @apiModelProperty(DataType.string, false, "test")
+    @apiModelProperty(DataType.STRING, false, "test")
     @dtoField()
     public note: string;
 }
