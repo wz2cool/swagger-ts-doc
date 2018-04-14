@@ -19,3 +19,4 @@ $ cd swagger-ts-doc-demo
 $ npm install
 $ npm start
 ```
+打开浏览器：http://localhost:3000/api-docs
