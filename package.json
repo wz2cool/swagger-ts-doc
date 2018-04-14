@@ -1,6 +1,6 @@
 {
-  "name": "ts-swagger-node",
-  "version": "0.0.2",
+  "name": "swagger-ts-doc",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {

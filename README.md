@@ -1,1 +1,1 @@
-# ts-swagger-node
+# swagger-ts-doc
