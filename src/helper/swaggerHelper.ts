@@ -75,34 +75,11 @@ export class SwaggerHelper {
             if (apiPropertyInfo.required) {
                 required.push(propertyName);
             }
-            const propTypeDef: any = {};
+            const propTypeDef: any = SwaggerHelper.generatePropertyDef(
+                apiPropertyInfo.dataType, apiPropertyInfo.refModel) || {};
             propTypeDef.type = DataType[apiPropertyInfo.dataType];
-            propTypeDef.description = apiPropertyInfo.notes;
+            propTypeDef.description = apiPropertyInfo.description;
             properties[propertyName] = propTypeDef;
-
-            if (!CommonHelper.isNullOrUndefined(apiPropertyInfo.refModel)) {
-                if (typeof apiPropertyInfo.refModel === "function") {
-                    const refModelStr = CommonHelper.getModelName(apiPropertyInfo.refModel);
-                    switch (apiPropertyInfo.dataType) {
-                        case DataType.array:
-                            propTypeDef.items = {
-                                $ref: `#/definitions/${refModelStr}`,
-                            };
-                            break;
-                        case DataType.object:
-                            propTypeDef.$ref = `#/definitions/${refModelStr}`;
-                            break;
-                    }
-                } else {
-                    switch (apiPropertyInfo.dataType) {
-                        case DataType.array:
-                            propTypeDef.items = {
-                                type: DataType[apiPropertyInfo.refModel],
-                            };
-                            break;
-                    }
-                }
-            }
         }
 
         const modelDef: any = {};
@@ -141,31 +118,38 @@ export class SwaggerHelper {
         const result: any = {};
         result.description = responseBody.description;
         const typeStr = DataType[responseBody.dataType];
-        if (!CommonHelper.isNullOrUndefined(responseBody.refModel)) {
-            const propTypeDef: any = {};
-            result.schema = propTypeDef;
-            if (typeof responseBody.refModel === "function") {
-                const refModelStr = CommonHelper.getModelName(responseBody.refModel);
-                switch (responseBody.dataType) {
-                    case DataType.array:
-                        propTypeDef.items = {
-                            $ref: `#/definitions/${refModelStr}`,
-                        };
-                        break;
-                    case DataType.object:
-                        propTypeDef.$ref = `#/definitions/${refModelStr}`;
-                        break;
-                }
-            } else {
-                switch (responseBody.dataType) {
-                    case DataType.array:
-                        propTypeDef.items = {
-                            type: DataType[responseBody.refModel],
-                        };
-                        break;
-                }
+        result.type = typeStr;
+        result.schema = SwaggerHelper.generatePropertyDef(responseBody.dataType, responseBody.refModel);
+        return result;
+    }
+
+    private static generatePropertyDef(dataType: DataType, refModel: { new(): any } | DataType): any {
+        if (CommonHelper.isNullOrUndefined(refModel)) {
+            return undefined;
+        }
+
+        const propTypeDef: any = {};
+        if (typeof refModel === "function") {
+            const refModelStr = CommonHelper.getModelName(refModel);
+            switch (dataType) {
+                case DataType.array:
+                    propTypeDef.items = {
+                        $ref: `#/definitions/${refModelStr}`,
+                    };
+                    break;
+                case DataType.object:
+                    propTypeDef.$ref = `#/definitions/${refModelStr}`;
+                    break;
+            }
+        } else {
+            switch (dataType) {
+                case DataType.array:
+                    propTypeDef.items = {
+                        type: DataType[refModel],
+                    };
+                    break;
             }
         }
-        return result;
+        return propTypeDef;
     }
 }

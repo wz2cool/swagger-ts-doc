@@ -5,6 +5,6 @@ export class ApiPropertyInfo {
     public propertyName: string;
     public dataType: DataType;
     public required: boolean;
-    public notes: string;
+    public description: string;
     public refModel: { new(): any } | DataType;
 }

@@ -38,7 +38,7 @@ export function apiModelProperty(dataType: DataType, required?: boolean, a1?, a2
         propertyInfo.propertyName = propertyKey;
         propertyInfo.dataType = dataType;
         propertyInfo.required = CommonHelper.isNullOrUndefined(required) ? false : required;
-        propertyInfo.notes = propertyNotes;
+        propertyInfo.description = propertyNotes;
         propertyInfo.refModel = internalRefModel;
         cache.cachePropertyInfo(propertyInfo);
     };

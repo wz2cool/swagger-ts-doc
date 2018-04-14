@@ -43,6 +43,7 @@ export class Server {
         options.info.title = "testSwagger";
 
         const jsDoc = swaggerJSDoc(options);
+        console.log(jsDoc);
         this.app.get("/api-docs.json", (req, res) => {
             res.setHeader("Content-Type", "application/json");
             res.send(jsDoc);
