@@ -1,8 +1,9 @@
 {
   "name": "swagger-ts-doc",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
-  "main": "dist\\index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
