@@ -1,6 +1,6 @@
 {
   "name": "swagger-ts-doc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wz2cool/ts-swagger-node.git"
+    "url": "git+https://github.com/wz2cool/swagger-ts-doc.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wz2cool/ts-swagger-node/issues"
+    "url": "https://github.com/wz2cool/swagger-ts-doc/issues"
   },
-  "homepage": "https://github.com/wz2cool/ts-swagger-node#readme",
+  "homepage": "https://github.com/wz2cool/swagger-ts-doc#readme",
   "dependencies": {
     "lodash": "~4.17.5",
     "reflect-metadata": "~0.1.12"
