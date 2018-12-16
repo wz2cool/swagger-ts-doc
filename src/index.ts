@@ -1,49 +1,47 @@
-import {
-    apiModelProperty,
-    log,
-} from "./decorator";
+import { ApiModelProperty, log } from "./decorator";
 
 import {
-    ApiPropertyInfo,
-    DataType,
-    HttpStatusCode,
-    PathVariable,
-    RequestBody,
-    RequestMethod,
-    RequestParam,
-    RequestParameter,
-    Response,
-    SwaggerContactProperty,
-    SwaggerInfoProperty,
-    SwaggerLicenseProperty,
-    SwaggerOptions,
+  ApiPropertyInfo,
+  DataType,
+  HttpStatusCode,
+  PathVariable,
+  RequestBody,
+  RequestMethod,
+  RequestParam,
+  RequestParameter,
+  Response,
+  SwaggerContactProperty,
+  SwaggerInfoProperty,
+  SwaggerLicenseProperty,
+  // tslint:disable-next-line:trailing-comma
+  SwaggerOptions
 } from "./model";
 
-import {
-    ApiModelCache,
-} from "./cache";
+import { ApiModelCache } from "./cache";
 
 import {
-    registerApiModel,
-    registerRequestMapping,
-    swaggerJSDoc,
+  registerApiModel,
+  registerRequestMapping,
+  // tslint:disable-next-line:trailing-comma
+  swaggerJSDoc
 } from "./provider";
 
 export {
-    apiModelProperty,
-    DataType,
-    registerApiModel,
-    RequestMethod,
-    registerRequestMapping,
-    RequestBody,
-    RequestParameter,
-    RequestParam,
-    PathVariable,
-    swaggerJSDoc,
-    SwaggerContactProperty,
-    SwaggerInfoProperty,
-    SwaggerLicenseProperty,
-    SwaggerOptions,
-    Response,
-    HttpStatusCode,
+  ApiModelProperty,
+  DataType,
+  registerApiModel,
+  RequestMethod,
+  registerRequestMapping,
+  RequestBody,
+  RequestParameter,
+  RequestParam,
+  PathVariable,
+  swaggerJSDoc,
+  SwaggerContactProperty,
+  SwaggerInfoProperty,
+  SwaggerLicenseProperty,
+  SwaggerOptions,
+  Response,
+  // tslint:disable-next-line:trailing-comma
+  HttpStatusCode
 };

@@ -1,4 +1,4 @@
-import { apiModelProperty } from "./apiModelProperty";
+import { ApiModelProperty } from "./apiModelProperty";
 import { log } from "./log";
 
-export { apiModelProperty, log };
+export { ApiModelProperty, log };
