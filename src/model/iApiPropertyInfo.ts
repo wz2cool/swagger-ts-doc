@@ -1,4 +1,4 @@
-import { DataType } from ".";
+import { DataType } from "./dataType";
 
 export interface IApiPropertyInfo {
   /**
